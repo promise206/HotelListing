@@ -1,6 +1,11 @@
+using HotelListing.API.Data;
+using HotelListing.API.Utility;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -12,8 +17,12 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.File("C:\\Users\\solan\\Desktop\\Log", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 builder.Services.AddCors();
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString
+    ("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(HotelListingProfile));
 
 var app = builder.Build();
+await DbInitializer.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
