@@ -39,10 +39,10 @@ namespace HotelListing.API.Repository
                 }
             }
 
-            return await _db.AsNoTracking().FirstOrDefaultAsync(expression);
+            return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
-        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
+        public async Task<List<T>> GetAll(Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> includes = null)
         {
             IQueryable<T> query = _db;
             if(expression != null)
@@ -63,7 +63,7 @@ namespace HotelListing.API.Repository
                 query = orderBy(query);
             }
 
-            return await    query.AsNoTracking().ToListAsync() ;
+            return await query.AsNoTracking().ToListAsync() ;
         }
 
         public async Task Insert(T entity)

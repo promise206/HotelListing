@@ -4,7 +4,7 @@ namespace HotelListing.API.IRepository
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IList<T>> GetAll(
+        Task<List<T>> GetAll(
             Expression<Func<T, bool>> expression = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, List<string> Includes = null
             );
         Task<T> Get(Expression<Func<T, bool>> expression, List<string>  includes = null);

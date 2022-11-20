@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string ShortName { get; set; }
 
-        public virtual ICollection<Hotel> Countries { get; set; }     
+        public virtual ICollection<Hotel> Hotels { get; set; }     
     }
 }

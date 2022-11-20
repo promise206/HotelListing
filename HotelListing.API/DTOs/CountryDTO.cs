@@ -7,7 +7,7 @@ namespace HotelListing.API.DTOs
         public string Name { get; set; }
         public string ShortName { get; set; }
 
-        public virtual ICollection<HotelDTO> Countries { get; set; }
+        public virtual ICollection<HotelDTO> Hotels { get; set; }
 
     }
 }
